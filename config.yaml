@@ -1,0 +1,78 @@
+# 视觉行为动作检测系统配置文件
+
+# 模型配置
+model:
+  # YOLOv8-Pose 模型
+  pose:
+    model_name: "yolov8n-pose.pt"  # 轻量级，可选 yolov8s-pose.pt, yolov8m-pose.pt
+    confidence_threshold: 0.5
+    nms_threshold: 0.4
+
+  # STGCN 模型
+  action:
+    model_path: "models/stgcn_model.pth"
+    num_classes: 8  # 动作类别数
+    sequence_length: 30  # 输入帧数
+    graph_layout: "coco"  # COCO 17点骨架
+
+# 动作类别定义
+action_classes:
+  - "stand"      # 站立
+  - "sit"        # 坐下
+  - "walk"       # 行走
+  - "run"        # 跑步
+  - "fall"       # 摔倒
+  - "bend"       # 弯腰
+  - "raise_hands" # 举手
+  - "unknown"    # 未知
+
+# 行为统计配置
+stats:
+  # 久坐提醒阈值（秒）
+  sedentary_threshold: 3600  # 1小时
+
+  # 统计时间窗口（秒）
+  stat_window: 3600
+
+  # 动作变化平滑窗口
+  smoothing_window: 5
+
+# 数据库配置
+database:
+  path: "data/health_logs.db"
+
+  # 表名
+  tables:
+    action_logs: "action_logs"
+    daily_stats: "daily_stats"
+
+# 定时任务配置
+scheduler:
+  # LLM分析触发时间（每天几点）
+  analysis_time: "09:00"
+
+  # 启用状态
+  enabled: true
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/action_detection.log"
+
+# 视频源配置
+video:
+  source: 0  # 摄像头ID，或视频文件路径
+  fps: 30
+  frame_skip: 2  # 跳帧处理，降低延迟
+
+# 性能配置
+performance:
+  # 推理批次大小
+  batch_size: 1
+
+  # 是否使用GPU
+  use_gpu: true
+
+  # ONNX加速（待实现）
+  use_onnx: false
