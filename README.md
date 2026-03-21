@@ -18,7 +18,7 @@
 | 姿态估计 | YOLOv8-Pose (Ultralytics) |
 | 行为识别 | STGCN (PyTorch) |
 | 视频处理 | OpenCV |
-| 数据处理 | NumPy, SciPy |
+| 数据处理 | NumPy |
 | 日志存储 | SQLite |
 | 定时任务 | APScheduler |
 
@@ -195,14 +195,6 @@ logs = db.get_action_logs(limit=100)
 # 使用真实数据集训练
 python train.py
 ```
-
-### 导出 ONNX 模型
-
-（待实现）
-
-## 问题记录
-
-实际开发中的问题和解决方案记录在 [问题记录.md](问题记录.md)
 
 ## License
 
