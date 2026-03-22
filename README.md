@@ -9,7 +9,6 @@
 - **行为统计**：久坐检测、活动量统计、动作变化分析
 - **摔倒检测**：自动检测摔倒事件并记录
 - **数据存储**：SQLite 持久化健康日志
-- **定时分析**：可配置定时任务触发 LLM 健康分析（待实现）
 
 ## 技术栈
 
@@ -20,7 +19,6 @@
 | 视频处理 | OpenCV |
 | 数据处理 | NumPy |
 | 日志存储 | SQLite |
-| 定时任务 | APScheduler |
 
 ## 项目结构
 
@@ -124,10 +122,7 @@ pytest
 - `stand` - 站立
 - `sit` - 坐下
 - `walk` - 行走
-- `run` - 跑步
 - `fall` - 摔倒
-- `bend` - 弯腰
-- `raise_hands` - 举手
 - `unknown` - 未知
 
 ## 数据存储
@@ -192,7 +187,6 @@ logs = db.get_action_logs(limit=100)
 ### 训练自己的模型
 
 ```python
-# 使用真实数据集训练
 python train.py
 ```
 
